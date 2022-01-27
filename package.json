@@ -1,15 +1,16 @@
 {
-  "name": "cleanrent",
+  "name": "clean-rent",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "@types/node": "^17.0.12",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
@@ -19,6 +20,15 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "git-commit-msg-linter": "^4.0.7",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.3.2",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint 'src/**' --fix"
+    ]
   }
 }
