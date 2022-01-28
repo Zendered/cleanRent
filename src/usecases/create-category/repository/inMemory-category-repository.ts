@@ -24,7 +24,7 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   }
 
   async findAllCategories(): Promise<ICategoryData[]> {
-    throw new Error('Method not implemented.');
+    return this.repository;
   }
 
   async exists(category: ICategoryData): Promise<boolean> {
