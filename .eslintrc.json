@@ -12,7 +12,7 @@
 		"ecmaVersion": "latest"
 	},
 	"plugins": [
-		"@typescript-eslint",
+		"@typescript-eslint"
 	],
 	"rules": {
 		"camelcase": "off",
