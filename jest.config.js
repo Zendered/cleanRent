@@ -4,15 +4,15 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '!**/test/**',
-    '!**/config/**'
+    '!**/config/**',
   ],
   testEnvironment: 'node',
   transform: {
-    '.+\\.ts$': 'ts-jest'
+    '.+\\.ts$': 'ts-jest',
   },
 
   moduleNameMapper: {
     '^@src/(.*)$': '<rootDir>/src/$1',
-    '^@test/(.*)$': '<rootDir>/test/$1'
-  }
-}
+    '^@test/(.*)$': '<rootDir>/test/$1',
+  },
+};
