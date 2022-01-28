@@ -4,9 +4,9 @@ import { ICategoryRepository } from '@/usecases/ports/category-repository';
 
 describe('In memory repository', () => {
   const categories: ICategoryData[] = [];
-  const categoryRepo: ICategoryRepository = new InMemoryCategoryRepository(categories);
+  const sut: ICategoryRepository = new InMemoryCategoryRepository(categories);
   test('should return null if category is not found', async () => {
-    const category = await categoryRepo.findCategoryById('my id');
+    const category = await sut.findCategoryById('my id');
     expect(category).toBeNull();
   });
 
@@ -17,8 +17,8 @@ describe('In memory repository', () => {
       description: 'my description',
       created_at: new Date(),
     };
-    await categoryRepo.add(category);
-    const result = await categoryRepo.findCategoryById('my id');
+    await sut.add(category);
+    const result = await sut.findCategoryById('my id');
     expect(result.name).toBe('my name');
   });
 
@@ -36,9 +36,9 @@ describe('In memory repository', () => {
       created_at: new Date(),
     };
     const categories: ICategoryData[] = [firstUser, secondUser];
-    const categoryRepo = new InMemoryCategoryRepository(categories);
+    const sut = new InMemoryCategoryRepository(categories);
 
-    const returnedCategory = await categoryRepo.findAllCategories();
+    const returnedCategory = await sut.findAllCategories();
     expect(returnedCategory.length).toBe(2);
   });
 });
