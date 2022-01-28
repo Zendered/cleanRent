@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import { ICategoryData } from '@src/usecases/create-category/category-data';
+import { ICategoryData } from '@/usecases/create-category/category-data';
 
 describe('Create category use case', () => {
   const categories: ICategoryData[] = [];
