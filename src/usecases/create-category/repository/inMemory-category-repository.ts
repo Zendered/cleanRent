@@ -16,11 +16,8 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   }
 
   async findCategoryById(id: string): Promise<ICategoryData> {
-    const category = await this.repository.filter((category) => category.id === id);
-    if (category.length > 0) {
-      return category[0];
-    }
-    return null;
+    const category = await this.repository.find(category => category.id === id);
+    return category || null;
   }
 
   async findAllCategories(): Promise<ICategoryData[]> {
