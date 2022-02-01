@@ -37,8 +37,8 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint --fix"
-    ],
-    "*.js": "eslint --cache --fix"
+      "eslint --fix",
+      "npm run test-staged --findRelatedTests"
+    ]
   }
 }
