@@ -1,5 +1,5 @@
 import { ICategoryRepository } from '@/usecases/ports/category-repository';
-import { ICategoryData } from '../category-data';
+import { ICategoryData } from '@/entities/category-data';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
   private repository:ICategoryData[];

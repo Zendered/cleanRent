@@ -1,4 +1,4 @@
-import { ICategoryData } from '@/usecases/create-category';
+import { ICategoryData } from '@/entities';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
 import { ICategoryRepository } from '@/usecases/ports/category-repository';
 

@@ -1,4 +1,4 @@
-import { ICategoryData } from '@/usecases/create-category/category-data';
+import { ICategoryData } from '@/entities';
 
 describe('Create category use case', () => {
   const categories: ICategoryData[] = [];

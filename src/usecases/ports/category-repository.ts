@@ -1,4 +1,4 @@
-import { ICategoryData } from '../create-category';
+import { ICategoryData } from '@/entities';
 
 export interface ICategoryRepository {
 add(category: ICategoryData): Promise<void>
