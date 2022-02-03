@@ -8,7 +8,7 @@ export class Category {
   private readonly description: string;
   private readonly created_at: Date;
 
-  constructor({
+  private constructor({
     id, name, description, created_at,
   }:ICategoryData) {
     this.id = id;
