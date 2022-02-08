@@ -2,9 +2,9 @@ import { Either, left, right } from '@/shared';
 import { InvalidDescriptionError } from './errors';
 
 export class Description {
-  private constructor(readonly description: string) {}
+  private constructor(private readonly description: string) {}
 
-  public static create(description:string): Either<InvalidDescriptionError, Description> {
+  static create(description:string): Either<InvalidDescriptionError, Description> {
     if (Description.validate(description)) {
       return right(new Description(description));
     }
@@ -17,7 +17,7 @@ export class Description {
       return false;
     }
 
-    if (description.length > 225) {
+    if (description.trim().length > 225 || description.trim().length < 5) {
       return false;
     }
 
