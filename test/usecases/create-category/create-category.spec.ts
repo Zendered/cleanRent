@@ -1,7 +1,7 @@
-import { ICategoryData } from '@/entities';
+import { ICategoryDTO } from '@/entities';
 
 describe('Create category use case', () => {
-  const categories: ICategoryData[] = [];
+  const categories: ICategoryDTO[] = [];
   //   const repo: CategoryRepository = new CategoryRepositoryInMemory(categories);
   //   const usecase: CreateCategory = new CreateCategory(repo);
   test('should create a category', async () => {
