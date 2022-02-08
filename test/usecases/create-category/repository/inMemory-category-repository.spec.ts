@@ -1,9 +1,9 @@
-import { ICategoryData } from '@/entities';
+import { ICategoryDTO } from '@/entities';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
 import { ICategoryRepository } from '@/usecases/ports/category-repository';
 
 describe('In memory repository', () => {
-  const categories: ICategoryData[] = [];
+  const categories: ICategoryDTO[] = [];
   const sut: ICategoryRepository = new InMemoryCategoryRepository(categories);
   test('should return null if category is not found', async () => {
     const category = await sut.findCategoryById('my id');
@@ -11,7 +11,7 @@ describe('In memory repository', () => {
   });
 
   test('should return a existent category', async () => {
-    const category:ICategoryData = {
+    const category:ICategoryDTO = {
       id: 'my id',
       name: 'my name',
       description: 'my description',
@@ -35,7 +35,7 @@ describe('In memory repository', () => {
       description: 'my description2',
       created_at: new Date(),
     };
-    const categories: ICategoryData[] = [firstUser, secondUser];
+    const categories: ICategoryDTO[] = [firstUser, secondUser];
     const sut = new InMemoryCategoryRepository(categories);
 
     const returnedCategory = await sut.findAllCategories();
