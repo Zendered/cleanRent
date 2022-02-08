@@ -1,4 +1,4 @@
-export interface ICategoryData {
+export interface ICategoryDTO {
     id?: string
     name: string
     description: string
