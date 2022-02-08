@@ -1,15 +1,15 @@
 import { Either, left, right } from '@/shared';
-import { InvalidNameError } from './errors';
+import { InvalidDescriptionError } from './errors';
 
 export class Description {
   private constructor(readonly description: string) {}
 
-  public static create(description:string): Either<InvalidNameError, Description> {
+  public static create(description:string): Either<InvalidDescriptionError, Description> {
     if (Description.validate(description)) {
       return right(new Description(description));
     }
 
-    return left(new InvalidNameError());
+    return left(new InvalidDescriptionError());
   }
 
   static validate(description:string): boolean {

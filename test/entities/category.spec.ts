@@ -1,5 +1,5 @@
 import { Category } from '@/entities';
-import { InvalidNameError } from '@/entities/errors/';
+import { InvalidNameError, InvalidDescriptionError } from '@/entities/errors/';
 import { left } from '@/shared/';
 
 describe('Category entity', () => {
@@ -22,6 +22,6 @@ describe('Category entity', () => {
       created_at: new Date(),
     };
     const error = Category.create(category);
-    expect(error).toEqual(left(new InvalidNameError()));
+    expect(error).toEqual(left(new InvalidDescriptionError()));
   });
 });
