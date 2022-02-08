@@ -1,4 +1,3 @@
-export * from './category-data';
+export * from './category-dto';
+export * from './category-name';
 export * from './category';
-export * from './car';
-export * from './car-data';
