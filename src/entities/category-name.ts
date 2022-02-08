@@ -2,9 +2,9 @@ import { Either, left, right } from '@/shared';
 import { InvalidNameError } from './errors';
 
 export class Name {
-  private constructor(readonly name: string) {}
+  private constructor(private readonly name: string) {}
 
-  public static create(name:string): Either<InvalidNameError, Name> {
+  static create(name:string): Either<InvalidNameError, Name> {
     if (Name.validate(name)) {
       return right(new Name(name));
     }
@@ -17,7 +17,7 @@ export class Name {
       return false;
     }
 
-    if (name.length > 100) {
+    if (name.trim().length > 100 || name.trim().length < 3) {
       return false;
     }
 
