@@ -12,6 +12,36 @@ describe('Category validation', () => {
     expect(Name.validate(category.description)).toBeFalsy();
   });
 
+  test('should only accept description with 225 chars', () => {
+    const category: ICategoryDTO = {
+      id: 'my id',
+      name: 'my name',
+      description: 'D'.repeat(226),
+      created_at: new Date(),
+    };
+    expect(Name.validate(category.description)).toBeFalsy();
+  });
+
+  test('should only accept description with 225 chars', () => {
+    const category: ICategoryDTO = {
+      id: 'my id',
+      name: 'my name',
+      description: 'D'.repeat(226),
+      created_at: new Date(),
+    };
+    expect(Name.validate(category.description)).toBeFalsy();
+  });
+
+  test('should only accept description with at least 5 chars', () => {
+    const category: ICategoryDTO = {
+      id: 'my id',
+      name: 'my name',
+      description: 'D     ',
+      created_at: new Date(),
+    };
+    expect(Name.validate(category.description)).toBeFalsy();
+  });
+
   test('should not accept null category name', () => {
     const category: ICategoryDTO = {
       id: null,
@@ -22,23 +52,23 @@ describe('Category validation', () => {
     expect(Name.validate(category.name)).toBeFalsy();
   });
 
-  test('should only accept name with 100 char', () => {
+  test('should only accept name with 100 chars', () => {
     const category: ICategoryDTO = {
       id: 'my id',
-      name: 'my name'.repeat(101),
+      name: 'N'.repeat(101),
       description: 'my description',
       created_at: new Date(),
     };
     expect(Name.validate(category.name)).toBeFalsy();
   });
 
-  test('should only accept description with 225 char', () => {
+  test('should only accept name with at least 3 chars', () => {
     const category: ICategoryDTO = {
       id: 'my id',
-      name: 'my name',
-      description: 'my description'.repeat(226),
+      name: 'N      ',
+      description: 'my description',
       created_at: new Date(),
     };
-    expect(Name.validate(category.description)).toBeFalsy();
+    expect(Name.validate(category.name)).toBeFalsy();
   });
 });
