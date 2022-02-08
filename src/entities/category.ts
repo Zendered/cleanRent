@@ -1,47 +1,21 @@
-import { ICategoryData } from '@/entities/';
-import { Either, left, right } from '@/shared';
-import { InvalidCategoryError } from './errors';
+import { Either, left } from '@/shared/';
+import { Name, ICategoryDTO } from '.';
+import { Description } from './category-description';
+import { InvalidNameError } from './errors';
+import { InvalidDescriptionError } from './errors/invalid-description-error';
 
 export class Category {
-  private readonly id: string;
-  private readonly name: string;
-  private readonly description: string;
-  private readonly created_at: Date;
-
-  private constructor({
-    id, name, description, created_at,
-  }:ICategoryData) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.created_at = created_at;
-  }
-
-  static create({
-    id, name, description, created_at,
-  }:ICategoryData): Either<InvalidCategoryError, Category> {
-    if (Category.validate({
-      id, name, description, created_at,
-    })) {
-      return right(new Category({
-        id, name, description, created_at,
-      }));
+  private constructor(private readonly name: Name, private readonly description:Description) {}
+  // eslint-disable-next-line consistent-return
+  static create(category:ICategoryDTO):Either<InvalidNameError | InvalidDescriptionError, Name > {
+    const nameOrError = Name.create(category.name);
+    if (nameOrError.isLeft()) {
+      return left(new InvalidNameError());
     }
 
-    return left(new InvalidCategoryError());
-  }
-
-  static validate({
-    id, name, description, created_at,
-  }:ICategoryData): boolean {
-    if (!id || !name || !description || !created_at) {
-      return false;
+    const descriptionOrError = Description.create(category.description);
+    if (descriptionOrError.isLeft()) {
+      return left(new InvalidDescriptionError());
     }
-
-    if (name.length > 100 || description.length > 200) {
-      return false;
-    }
-
-    return true;
   }
 }
