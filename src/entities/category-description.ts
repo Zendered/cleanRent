@@ -2,7 +2,7 @@ import { Either, left, right } from '@/shared';
 import { InvalidDescriptionError } from './errors';
 
 export class Description {
-  private constructor(private readonly description: string) {}
+  private constructor(public readonly description: string) {}
 
   static create(description:string): Either<InvalidDescriptionError, Description> {
     if (Description.validate(description)) {

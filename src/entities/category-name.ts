@@ -2,7 +2,7 @@ import { Either, left, right } from '@/shared';
 import { InvalidNameError } from './errors';
 
 export class Name {
-  private constructor(private readonly name: string) {}
+  private constructor(public readonly name: string) {}
 
   static create(name:string): Either<InvalidNameError, Name> {
     if (Name.validate(name)) {
