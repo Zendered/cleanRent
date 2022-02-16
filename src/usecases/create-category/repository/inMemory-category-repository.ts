@@ -2,11 +2,7 @@ import { ICategoryRepository } from '@/usecases/ports/category-repository';
 import { ICategoryDTO } from '@/entities/category-dto';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
-  private repository:ICategoryDTO[];
-
-  constructor(repository: ICategoryDTO[]) {
-    this.repository = repository;
-  }
+  constructor(private repository:ICategoryDTO[] = []) {}
 
   async add(category: ICategoryDTO): Promise<void> {
     const exists = await this.exists(category);
