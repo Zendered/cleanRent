@@ -20,12 +20,12 @@ export class Category {
   static create(category:ICategoryDTO):Either<InvalidNameError | InvalidDescriptionError, Category> {
     const nameOrError = Name.create(category.name);
     if (nameOrError.isLeft()) {
-      return left(new InvalidNameError());
+      return left(new InvalidNameError(category.name));
     }
 
     const descriptionOrError = Description.create(category.description);
     if (descriptionOrError.isLeft()) {
-      return left(new InvalidDescriptionError());
+      return left(new InvalidDescriptionError(category.description));
     }
 
     const name: Name = nameOrError.value as Name;

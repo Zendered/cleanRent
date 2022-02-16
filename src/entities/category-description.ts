@@ -9,7 +9,7 @@ export class Description {
       return right(new Description(description));
     }
 
-    return left(new InvalidDescriptionError());
+    return left(new InvalidDescriptionError(description));
   }
 
   static validate(description:string): boolean {
