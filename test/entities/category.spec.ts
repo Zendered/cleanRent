@@ -1,6 +1,4 @@
 import { Category, ICategoryDTO } from '@/entities';
-import { InvalidNameError, InvalidDescriptionError } from '@/entities/errors/';
-import { left } from '@/shared/';
 
 describe('Category entity', () => {
   test('should not create category if name has more than 100 chars', () => {
@@ -10,8 +8,9 @@ describe('Category entity', () => {
       description: 'my description',
       created_at: new Date(),
     };
-    const error = Category.create(invalidCategory);
-    expect(error).toEqual(left(new InvalidNameError()));
+    const error = Category.create(invalidCategory).value as Error;
+    expect(error.name).toEqual('InvalidNameError');
+    expect(error.message).toEqual(`Invalid name: ${invalidCategory.name}.`);
   });
 
   test('should not create Category if description has more than 225 chars', () => {
@@ -21,8 +20,9 @@ describe('Category entity', () => {
       description: 'D'.repeat(226),
       created_at: new Date(),
     };
-    const error = Category.create(invalidCategory);
-    expect(error).toEqual(left(new InvalidDescriptionError()));
+    const error = Category.create(invalidCategory).value as Error;
+    expect(error.name).toEqual('InvalidDescriptionError');
+    expect(error.message).toEqual(`Invalid description: ${invalidCategory.description}.`);
   });
 
   test('should not create Category if description has less then 5 chars', () => {
@@ -32,8 +32,9 @@ describe('Category entity', () => {
       description: 'D       ',
       created_at: new Date(),
     };
-    const error = Category.create(invalidCategory);
-    expect(error).toEqual(left(new InvalidDescriptionError()));
+    const error = Category.create(invalidCategory).value as Error;
+    expect(error.name).toEqual('InvalidDescriptionError');
+    expect(error.message).toEqual(`Invalid description: ${invalidCategory.description}.`);
   });
 
   test('should not create Category if name has less than 3 chars', () => {
@@ -43,8 +44,9 @@ describe('Category entity', () => {
       description: 'my description',
       created_at: new Date(),
     };
-    const error = Category.create(invalidCategory);
-    expect(error).toEqual(left(new InvalidDescriptionError()));
+    const error = Category.create(invalidCategory).value as Error;
+    expect(error.name).toEqual('InvalidNameError');
+    expect(error.message).toEqual(`Invalid name: ${invalidCategory.name}.`);
   });
 
   test('should create Category with valid data', () => {

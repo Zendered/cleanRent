@@ -2,8 +2,6 @@ import { ICategoryDTO } from '@/entities';
 import { ICategoryRepository } from '@/usecases/ports/category-repository';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
 import { CreateCategory } from '@/usecases/create-category/create-category';
-import { left } from '@/shared';
-import { InvalidDescriptionError, InvalidNameError } from '@/entities/errors';
 
 describe('Create category use case', () => {
   const categories: ICategoryDTO[] = [];
@@ -22,24 +20,24 @@ describe('Create category use case', () => {
   });
 
   test('Should not create category with invalid description', async () => {
-    const response = await usecase.perform({
+    const response = (await usecase.perform({
       id: 'my id 01',
       name: 'my name',
       description: 'm     ',
-    });
+    })).value as Error;
     const category = await repo.findCategoryById('my id 01');
     expect(category).toBeNull();
-    expect(response).toEqual(left(new InvalidDescriptionError()));
+    expect(response.name).toEqual('InvalidDescriptionError');
   });
 
   test('Should not create category with invalid name', async () => {
-    const response = await usecase.perform({
+    const response = (await usecase.perform({
       id: 'my id 02',
       name: 'N'.repeat(101),
       description: 'my description',
-    });
+    })).value as Error;
     const category = await repo.findCategoryById('my id 02');
     expect(category).toBeNull();
-    expect(response).toEqual(left(new InvalidNameError()));
+    expect(response.name).toEqual('InvalidNameError');
   });
 });
