@@ -53,6 +53,7 @@ describe('Category entity', () => {
       description: 'my description',
     };
     const newCategory: Category = Category.create(validCategory).value as Category;
+    expect(newCategory.id).toEqual('my id');
     expect(newCategory.name.name).toEqual(validCategory.name);
     expect(newCategory.description.description).toEqual(validCategory.description);
   });
