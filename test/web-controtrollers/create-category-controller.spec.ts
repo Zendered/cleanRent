@@ -4,6 +4,7 @@ import { CreateCategory } from '@/usecases/create-category/create-category';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
 import { ICategoryRepository } from '@/usecases/ports/category-repository';
 import { CreateCategoryController } from '@/web-controllers/create-category-controller';
+import { MissingParamError } from '@/web-controllers/errors/missing-params-error';
 import { IHttpRequest, IHttpResponse } from '@/web-controllers/ports';
 
 describe('Create category web controller', () => {
@@ -53,5 +54,49 @@ describe('Create category web controller', () => {
     const response: IHttpResponse = await controller.handle(requestWithInvalidDescription);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toBeInstanceOf(InvalidDescriptionError);
+  });
+
+  test('Should return 400 when request is missing param name', async () => {
+    const requestWithMissingName: IHttpRequest = {
+      body: {
+        id: 'my id',
+        description: 'my description',
+        created_at: new Date(),
+      },
+    };
+    const controller: CreateCategoryController = new CreateCategoryController(usecase);
+    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    expect(response.statusCode).toEqual(400);
+    expect(response.body).toBeInstanceOf(MissingParamError);
+    expect(response.body.message as Error).toEqual('Missing parameter from request: name.');
+  });
+
+  test('Should return 400 when request is missing param description', async () => {
+    const requestWithMissingName: IHttpRequest = {
+      body: {
+        id: 'my id',
+        name: 'my name',
+        created_at: new Date(),
+      },
+    };
+    const controller: CreateCategoryController = new CreateCategoryController(usecase);
+    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    expect(response.statusCode).toEqual(400);
+    expect(response.body).toBeInstanceOf(MissingParamError);
+    expect(response.body.message as Error).toEqual('Missing parameter from request: description.');
+  });
+
+  test('Should return 400 when request is missing param name and description', async () => {
+    const requestWithMissingName: IHttpRequest = {
+      body: {
+        id: 'my id',
+        created_at: new Date(),
+      },
+    };
+    const controller: CreateCategoryController = new CreateCategoryController(usecase);
+    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    expect(response.statusCode).toEqual(400);
+    expect(response.body).toBeInstanceOf(MissingParamError);
+    expect(response.body.message as Error).toEqual('Missing parameter from request: name description.');
   });
 });
