@@ -2,15 +2,25 @@ import { ICategoryDTO } from '@/entities';
 import { InvalidDescriptionError, InvalidNameError } from '@/entities/errors';
 import { CreateCategory } from '@/usecases/create-category/create-category';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
-import { ICategoryRepository } from '@/usecases/ports/category-repository';
+import { ICategoryRepository } from '@/usecases/create-category/ports/category-repository';
 import { CreateCategoryController } from '@/web-controllers/create-category-controller';
 import { MissingParamError } from '@/web-controllers/errors/missing-params-error';
 import { IHttpRequest, IHttpResponse } from '@/web-controllers/ports';
+import { IUseCase } from '@/usecases/ports';
 
 describe('Create category web controller', () => {
   const categories: ICategoryDTO[] = [];
   const repo: ICategoryRepository = new InMemoryCategoryRepository(categories);
-  const usecase: CreateCategory = new CreateCategory(repo);
+  const usecase: IUseCase = new CreateCategory(repo);
+
+  class ErrorThrowingUseCaseStub implements IUseCase {
+    perform(request: any): Promise<void> {
+      throw Error();
+    }
+  }
+
+  const errorThrowingUseCaseStub: IUseCase = new ErrorThrowingUseCaseStub();
+
   test('Should return 201 when request contains valid category data', async () => {
     const request: IHttpRequest = {
       body: {
@@ -98,5 +108,20 @@ describe('Create category web controller', () => {
     expect(response.statusCode).toEqual(400);
     expect(response.body).toBeInstanceOf(MissingParamError);
     expect(response.body.message as Error).toEqual('Missing parameter from request: name description.');
+  });
+
+  test('Should return 500 when server raises', async () => {
+    const requestWithMissingName: IHttpRequest = {
+      body: {
+        id: 'my id',
+        name: 'my name',
+        description: 'my description',
+        created_at: new Date(),
+      },
+    };
+    const controller: CreateCategoryController = new CreateCategoryController(errorThrowingUseCaseStub);
+    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    expect(response.statusCode).toEqual(500);
+    expect(response.body).toBeInstanceOf(Error);
   });
 });
