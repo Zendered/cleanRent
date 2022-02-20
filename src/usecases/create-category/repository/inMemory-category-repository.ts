@@ -1,4 +1,4 @@
-import { ICategoryRepository } from '@/usecases/ports/category-repository';
+import { ICategoryRepository } from '@/usecases/create-category/ports/category-repository';
 import { ICategoryDTO } from '@/entities/category-dto';
 
 export class InMemoryCategoryRepository implements ICategoryRepository {
