@@ -1,9 +1,11 @@
 import { Category, ICategoryDTO } from '@/entities';
 import { InvalidDescriptionError, InvalidNameError } from '@/entities/errors';
 import { Either, left, right } from '@/shared';
+import { IUseCase } from '../ports';
+
 import { ICategoryRepository } from './ports/category-repository';
 
-export class CreateCategory {
+export class CreateCategory implements IUseCase {
   constructor(private readonly categoryRepo: ICategoryRepository) {
   }
 
