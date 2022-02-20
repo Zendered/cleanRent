@@ -82,7 +82,7 @@ describe('Create category web controller', () => {
   });
 
   test('Should return 400 when request is missing param description', async () => {
-    const requestWithMissingName: IHttpRequest = {
+    const requestWithMissingDescription: IHttpRequest = {
       body: {
         id: 'my id',
         name: 'my name',
@@ -90,28 +90,28 @@ describe('Create category web controller', () => {
       },
     };
     const controller: CreateCategoryController = new CreateCategoryController(usecase);
-    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    const response: IHttpResponse = await controller.handle(requestWithMissingDescription);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toBeInstanceOf(MissingParamError);
     expect(response.body.message as Error).toEqual('Missing parameter from request: description.');
   });
 
   test('Should return 400 when request is missing param name and description', async () => {
-    const requestWithMissingName: IHttpRequest = {
+    const requestWithMissingNameAndDescription: IHttpRequest = {
       body: {
         id: 'my id',
         created_at: new Date(),
       },
     };
     const controller: CreateCategoryController = new CreateCategoryController(usecase);
-    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    const response: IHttpResponse = await controller.handle(requestWithMissingNameAndDescription);
     expect(response.statusCode).toEqual(400);
     expect(response.body).toBeInstanceOf(MissingParamError);
     expect(response.body.message as Error).toEqual('Missing parameter from request: name description.');
   });
 
   test('Should return 500 when server raises', async () => {
-    const requestWithMissingName: IHttpRequest = {
+    const request: IHttpRequest = {
       body: {
         id: 'my id',
         name: 'my name',
@@ -120,7 +120,7 @@ describe('Create category web controller', () => {
       },
     };
     const controller: CreateCategoryController = new CreateCategoryController(errorThrowingUseCaseStub);
-    const response: IHttpResponse = await controller.handle(requestWithMissingName);
+    const response: IHttpResponse = await controller.handle(request);
     expect(response.statusCode).toEqual(500);
     expect(response.body).toBeInstanceOf(Error);
   });
