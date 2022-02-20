@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.12",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
@@ -40,5 +41,8 @@
       "eslint --fix",
       "npm run test-staged --findRelatedTests"
     ]
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }
