@@ -1,6 +1,6 @@
 import { ICategoryDTO } from '@/entities';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
-import { ICategoryRepository } from '@/usecases/ports/category-repository';
+import { ICategoryRepository } from '@/usecases/create-category/ports/category-repository';
 
 describe('In memory repository', () => {
   const categories: ICategoryDTO[] = [];

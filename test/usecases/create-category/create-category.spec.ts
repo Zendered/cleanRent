@@ -1,5 +1,5 @@
 import { ICategoryDTO } from '@/entities';
-import { ICategoryRepository } from '@/usecases/ports/category-repository';
+import { ICategoryRepository } from '@/usecases/create-category/ports/category-repository';
 import { InMemoryCategoryRepository } from '@/usecases/create-category/repository/inMemory-category-repository';
 import { CreateCategory } from '@/usecases/create-category/create-category';
 
