@@ -11,7 +11,7 @@
     "test-verbose": "jest --passWithNoTests --runInBand",
     "test-staged": "npm test -- --findRelatedTests",
     "start": "node dist/main/server.js",
-    "build": "rimraf dist && tsc -p tsconfig-build.json dist"
+    "build": "rimraf dist && tsc -p tsconfig-build.json"
   },
   "keywords": [],
   "author": "",
