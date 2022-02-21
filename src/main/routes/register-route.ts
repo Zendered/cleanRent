@@ -3,5 +3,5 @@ import { makeCategoryController } from '@/main/factories/';
 import { adaptRoute } from '../adapters';
 
 export default (router: Router): void => {
-  router.post('/register', adaptRoute(makeCategoryController()));
+  router.post('/create_category', adaptRoute(makeCategoryController()));
 };

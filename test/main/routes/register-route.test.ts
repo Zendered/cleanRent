@@ -7,7 +7,7 @@ describe('Register route', () => {
       res.send();
     });
     await request(app)
-      .post('/api/register')
+      .post('/api/create_category')
       .send({
         id: 'my id',
         name: 'my name',
