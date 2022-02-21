@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { CreateCategoryController } from '@/web-controllers/';
 import { IHttpRequest } from '@/web-controllers/ports';
 
-export const adaptRout = (controller: CreateCategoryController) => async (req:Request, res:Response) => {
+export const adaptRoute = (controller: CreateCategoryController) => async (req:Request, res:Response) => {
   const httpRequest: IHttpRequest = {
     body: req.body,
   };
