@@ -10,7 +10,7 @@
     "test-ci": "npm test -- --coverage",
     "test-verbose": "jest --passWithNoTests --runInBand",
     "test-staged": "npm test -- --findRelatedTests",
-    "build": "rimraf dist && tsc -p tsconfig-build.json"
+    "build": "rimraf dist && tsc -p tsconfig-build.json dist"
   },
   "keywords": [],
   "author": "",
