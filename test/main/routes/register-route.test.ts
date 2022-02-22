@@ -9,10 +9,8 @@ describe('Register route', () => {
     await request(app)
       .post('/api/create_category')
       .send({
-        id: 'my id',
         name: 'my name',
         description: 'my description',
-        created_at: new Date(),
       })
       .expect(201);
   });
