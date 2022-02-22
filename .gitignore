@@ -4,3 +4,4 @@ dist
 .eslintcache
 coverage
 .env
+dev.db
